@@ -5,11 +5,20 @@ import "@fontsource/roboto/300.css";
 import "@fontsource/roboto/400.css";
 import "@fontsource/roboto/500.css";
 import "@fontsource/roboto/700.css";
-import { Box, Button, Stack, Typography } from "@mui/material";
-import { useState } from "react";
+import {
+  Box,
+  Button,
+  Drawer,
+  IconButton,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import React, { useState } from "react";
 import Licencia from "../componentes/Licencia";
 import BotonLicencia from "../componentes/BotonLicencia";
 import Link from "next/link";
+import useMediaQuery from "@mui/material/useMediaQuery";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -50,7 +59,12 @@ export const licencias = [
 
 export default function Home() {
   const [licencia, setLicencia] = useState("Licencia de 1 mes");
+  const [drawerOpen, setDrawerOpen] = useState(false);
 
+  const theme = useTheme();
+  const grande = useMediaQuery(theme.breakpoints.up("md"));
+  console.log(grande);
+  // https://i.pngimg.me/thumb/f/720/m2i8G6G6b1m2A0G6.jpg
   return (
     <>
       <Head>
@@ -63,8 +77,8 @@ export default function Home() {
         style={{
           backgroundColor: "#181a20",
           color: "#e5e7eb",
-          paddingLeft: 50,
-          paddingRight: 50,
+          paddingLeft: 25,
+          paddingRight: 25,
         }}
       >
         <Stack
@@ -76,77 +90,182 @@ export default function Home() {
           <Typography color="#e5e7eb" fontWeight={600}>
             Wallet Hunter
           </Typography>
-          <Stack alignItems="center" gap={2} direction="row">
-            <Link
-              href="#como-funciona"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "#e5e7eb",
-                fontWeight: 600,
-                userSelect: "none",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              <Typography color="#e5e7eb" fontWeight={600}>
-                Como funciona
-              </Typography>
-            </Link>
-            <Link
-              href="#precios"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "#e5e7eb",
-                fontWeight: 600,
-                userSelect: "none",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              <Typography fontWeight={600}>Precios</Typography>
-            </Link>
-            <Link
-              href="#preguntas=frecuentes"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "#e5e7eb",
-                fontWeight: 600,
-                userSelect: "none",
+          {grande && (
+            <Stack display="flex" alignItems="center" gap={2} direction="row">
+              <Link
+                href="#como-funciona"
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "#e5e7eb",
+                  fontWeight: 600,
+                  userSelect: "none",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                <Typography color="#e5e7eb" fontWeight={600}>
+                  Como funciona
+                </Typography>
+              </Link>
+              <Link
+                href="#precios"
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "#e5e7eb",
+                  fontWeight: 600,
+                  userSelect: "none",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                <Typography fontWeight={600}>Precios</Typography>
+              </Link>
+              <Link
+                href="#preguntas=frecuentes"
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "#e5e7eb",
+                  fontWeight: 600,
+                  userSelect: "none",
 
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              <Typography fontWeight={600}>Preguntas</Typography>
-            </Link>
-            <Link
-              href="https://t.me/wallethunterr?text=Hola%20estoy%20interesado"
-              target="_blank"
-              style={{
-                cursor: "pointer",
-                textDecoration: "none",
-                color: "#e5e7eb",
-                fontWeight: 600,
-                userSelect: "none",
-                backgroundColor: "#fcd535",
-                color: "#1e2329",
-                "&:hover": {
-                  textDecoration: "underline",
-                },
-              }}
-            >
-              <Typography fontWeight={600} p={1}>
-                Contactarse
-              </Typography>
-            </Link>
-            {/* <Button>Contactarse</Button> */}
-          </Stack>
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                <Typography fontWeight={600}>Preguntas</Typography>
+              </Link>
+              <Link
+                href="https://t.me/wallethunterr?text=Hola%20estoy%20interesado"
+                target="_blank"
+                style={{
+                  cursor: "pointer",
+                  textDecoration: "none",
+                  color: "#e5e7eb",
+                  fontWeight: 600,
+                  userSelect: "none",
+                  backgroundColor: "#fcd535",
+                  color: "#1e2329",
+                  "&:hover": {
+                    textDecoration: "underline",
+                  },
+                }}
+              >
+                <Typography fontWeight={600} p={1}>
+                  Contactarse
+                </Typography>
+              </Link>
+              {/* <Button>Contactarse</Button> */}
+            </Stack>
+          )}
+
+          {!grande && (
+            <Box display={{ base: "block", md: "none" }}>
+              <IconButton
+                color="inherit"
+                aria-label="menu"
+                onClick={() => setDrawerOpen(true)}
+                sx={{ display: { md: "none" } }}
+              >
+                <img
+                  width="25px"
+                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/59/Hamburger_icon_white.svg/1024px-Hamburger_icon_white.svg.png"
+                />
+              </IconButton>
+              <Drawer
+                anchor="right"
+                open={drawerOpen}
+                onClose={() => setDrawerOpen(false)}
+              >
+                <Stack
+                  p={2}
+                  height="100%"
+                  gap={2}
+                  sx={{ width: 250, backgroundColor: "#181a20" }}
+                  role="presentation"
+                  onClick={() => setDrawerOpen(false)}
+                  onKeyDown={() => setDrawerOpen(false)}
+                >
+                  <Typography color="#e5e7eb" fontWeight={600}>
+                    Wallet Hunter
+                  </Typography>
+                  <Link
+                    href="#como-funciona"
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "#e5e7eb",
+                      fontWeight: 600,
+                      userSelect: "none",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    <Typography color="#e5e7eb" fontWeight={600}>
+                      Como funciona
+                    </Typography>
+                  </Link>
+                  <Link
+                    href="#precios"
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "#e5e7eb",
+                      fontWeight: 600,
+                      userSelect: "none",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    <Typography fontWeight={600}>Precios</Typography>
+                  </Link>
+                  <Link
+                    href="#preguntas=frecuentes"
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "#e5e7eb",
+                      fontWeight: 600,
+                      userSelect: "none",
+
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    <Typography fontWeight={600}>Preguntas</Typography>
+                  </Link>
+                  <Link
+                    href="https://t.me/wallethunterr?text=Hola%20estoy%20interesado"
+                    target="_blank"
+                    style={{
+                      cursor: "pointer",
+                      textDecoration: "none",
+                      color: "#e5e7eb",
+                      fontWeight: 600,
+                      userSelect: "none",
+                      backgroundColor: "#fcd535",
+                      color: "#1e2329",
+                      "&:hover": {
+                        textDecoration: "underline",
+                      },
+                    }}
+                  >
+                    <Typography fontWeight={600} p={1}>
+                      Contactarse
+                    </Typography>
+                  </Link>
+                </Stack>
+              </Drawer>
+            </Box>
+          )}
         </Stack>
 
         <Stack
