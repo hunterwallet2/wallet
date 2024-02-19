@@ -5,6 +5,7 @@ import Licencia from "../componentes/Licencia";
 import { Box, Button, Select, Stack, Typography } from "@mui/material";
 import CustomSelect from "../componentes/CustomSelect";
 import { useRouter } from "next/router";
+import Link from "next/link";
 
 export default function licencia() {
   const [selectedCurrency, setSelectedCurrency] = useState("");
@@ -125,18 +126,26 @@ export default function licencia() {
         <Stack direction={{ base: "column", md: "row" }} gap={8}>
           <Box width={{ base: "100%", md: "30%" }}>
             <Licencia nombre={licencia?.nombre} boton={false} />
-            <Button
-              fullWidth
+            <Link
+              href="https://t.me/wallethunterr?text=Hola%20estoy%20interesado"
+              target="_blank"
               style={{
+                cursor: "pointer",
+                textDecoration: "none",
+                color: "#e5e7eb",
+                fontWeight: 600,
+                userSelect: "none",
                 backgroundColor: "#fcd535",
                 color: "#1e2329",
-                marginTop: 30,
-                fontWeight: 700,
+                "&:hover": {
+                  textDecoration: "underline",
+                },
               }}
-              variant="contained"
             >
-              PAGO REALIZADO
-            </Button>
+              <Typography fontWeight={600} p={1}>
+                Contactarse
+              </Typography>
+            </Link>
           </Box>
           <Box>
             <Typography mb={1} fontWeight={600} fontSize={18}>
@@ -182,12 +191,7 @@ export default function licencia() {
             </Stack>
 
             <Typography mb={1} fontWeight={600} fontSize={18}>
-              Paso 3: Una vez realizaste el pago aprieta el boton PAGO REALIZADO
-            </Typography>
-            <Typography mb={1} fontWeight={600} fontSize={18}>
-              Paso 4: Llena los datos del formulario y nos estaremos contactando
-              contigo en menos de 24 horas para enviarte el software con la
-              licencia por email
+              Paso 3: Una vez realizaste el pago aprieta el boton de CONTACTARSE para ir a telegram y pasarnos tu email y billetera donde hiciste el deposito asi poder mandarte el programa y las instrucciones de instalacion
             </Typography>
           </Box>
         </Stack>
