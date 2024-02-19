@@ -97,8 +97,8 @@ export default function licencia() {
         minHeight: "100vh",
         backgroundColor: "#181a20",
         color: "#e5e7eb",
-        paddingLeft: 50,
-        paddingRight: 50,
+        paddingLeft: 25,
+        paddingRight: 25,
       }}
     >
       <Stack py={5}>
@@ -124,7 +124,7 @@ export default function licencia() {
           </Button>
         </Stack>
         <Stack direction={{ base: "column", md: "row" }} gap={8}>
-          <Box width={{ base: "100%", md: "30%" }}>
+          <Box width={{ base: "100%", md: "40%" }}>
             <Licencia nombre={licencia?.nombre} boton={false} />
             <Link
               href="https://t.me/wallethunterr?text=Hola%20estoy%20interesado"
